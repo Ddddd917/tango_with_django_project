@@ -1,10 +1,14 @@
 from django.contrib import admin
 from rango.models import Category, Page
 
-# 1. 创建定制类
+# Customize the Category admin interface
+class CategoryAdmin(admin.ModelAdmin):
+    # Automatically populate the slug field based on the name field
+    prepopulated_fields = {'slug':('name',)}
+
 class PageAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'url')
 
-# 2. 注册时带上这个类
-admin.site.register(Category)
+# Register the models
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Page, PageAdmin)
