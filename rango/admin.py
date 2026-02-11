@@ -1,14 +1,14 @@
 from django.contrib import admin
 from rango.models import Category, Page
-
-# Customize the Category admin interface
-class CategoryAdmin(admin.ModelAdmin):
-    # Automatically populate the slug field based on the name field
-    prepopulated_fields = {'slug':('name',)}
+from rango.models import UserProfile # Import UserProfile
 
 class PageAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'url')
 
-# Register the models
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('name',)}
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Page, PageAdmin)
+# Register the new model
+admin.site.register(UserProfile)
